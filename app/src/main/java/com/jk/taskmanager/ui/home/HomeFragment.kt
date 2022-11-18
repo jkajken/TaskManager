@@ -9,7 +9,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.jk.taskmanager.R
 import com.jk.taskmanager.databinding.FragmentHomeBinding
-import com.jk.taskmanager.model.Task
+import com.jk.taskmanager.data.model.Task
 import com.jk.taskmanager.ui.home.adapter.TaskAdapter
 
 class HomeFragment : Fragment() {

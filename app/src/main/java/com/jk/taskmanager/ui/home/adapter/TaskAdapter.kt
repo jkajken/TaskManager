@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jk.taskmanager.databinding.ItemTaskBinding
-import com.jk.taskmanager.model.Task
+import com.jk.taskmanager.data.model.Task
 
 class TaskAdapter() :
     RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {

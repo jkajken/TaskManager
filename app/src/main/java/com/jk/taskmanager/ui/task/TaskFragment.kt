@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.jk.taskmanager.R
 import com.jk.taskmanager.databinding.FragmentTaskBinding
-import com.jk.taskmanager.model.Task
+import com.jk.taskmanager.data.model.Task
 
 class TaskFragment : Fragment() {
     private lateinit var binding: FragmentTaskBinding

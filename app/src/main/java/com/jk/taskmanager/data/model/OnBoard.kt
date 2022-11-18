@@ -1,4 +1,4 @@
-package com.jk.taskmanager.model
+package com.jk.taskmanager.data.model
 
 data class OnBoard(
     var image: Int ?=null,
