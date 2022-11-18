@@ -1,6 +1,5 @@
 package com.jk.taskmanager.ui.profile
 
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,13 +35,13 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pref = Pref(requireContext())
         binding.profileImage.setOnClickListener {
             getContent.launch("image/*")
-
+            binding.etName.editText?.setText(pref.getName()).toString()
             binding.etName.addOnEditTextAttachedListener {
+                pref.saveName(binding.etName.editText?.text.toString())
             }
         }
-
-
     }
 }
