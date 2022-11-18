@@ -29,6 +29,7 @@ class OnBoardingFragment : Fragment() {
         pref = Pref(requireContext())
         val adapter = OnBoardingAdapter{
             pref.saveShowBoarding(true)
+
             findNavController().navigateUp()
         }
 
