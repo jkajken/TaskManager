@@ -1,18 +1,22 @@
 package com.jk.taskmanager.ui.profile
 
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import com.jk.taskmanager.data.local.Pref
 import com.jk.taskmanager.databinding.FragmentProfileBinding
 import com.squareup.picasso.Picasso
+
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var pref: Pref
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             // Handle the returned Uri
@@ -34,8 +38,11 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.profileImage.setOnClickListener {
             getContent.launch("image/*")
+
+            binding.etName.addOnEditTextAttachedListener {
+            }
         }
+
+
     }
-
-
 }

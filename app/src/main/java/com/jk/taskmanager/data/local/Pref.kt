@@ -15,6 +15,8 @@ class Pref (private val context: Context){
         pref.edit().putBoolean(BOARDING_SHOW,isShow).apply()
     }
 
+
+
     companion object{
         private const val BOARDING_SHOW = "boarding.show"
     }

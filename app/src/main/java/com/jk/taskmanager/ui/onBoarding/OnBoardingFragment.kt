@@ -19,7 +19,7 @@ class OnBoardingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragmentj
+        // Inflate the layout for this fragment
         binding = FragmentOnBoardingBinding.inflate(inflater, container, false)
         return binding.root
     }
