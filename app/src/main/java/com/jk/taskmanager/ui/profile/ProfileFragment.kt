@@ -42,15 +42,18 @@ class ProfileFragment : Fragment() {
 
             pref = Pref(requireContext())
 
+            //name
             binding.etName2.setText(pref.getName())
             binding.etName2.addTextChangedListener {
                 pref.saveName(binding.etName2.text.toString())
 
 
+                //age
                 binding.etAge2.setText(pref.getAge()).toString()
                 binding.etAge2.addTextChangedListener {
                     pref.saveAge(binding.etAge2.text.toString())
 
+                 //image
                     Picasso.with(context).load(pref.getImage())
                         .resize(800, 800)
                         .into(binding.profileImage)
