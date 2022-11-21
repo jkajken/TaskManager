@@ -24,7 +24,7 @@ class OnBoardingFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pref = Pref(requireContext())
         val adapter = OnBoardingAdapter{
@@ -39,7 +39,7 @@ class OnBoardingFragment : Fragment() {
 
     }
 
-    private fun onClick(view: View) {
+    private fun onClick() {
         findNavController().navigateUp()
     }
 }

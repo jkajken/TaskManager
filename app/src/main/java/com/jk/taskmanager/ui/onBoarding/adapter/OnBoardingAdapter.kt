@@ -1,14 +1,12 @@
 package com.jk.taskmanager.ui.onBoarding.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.jk.taskmanager.R
 import com.jk.taskmanager.databinding.ItemOnBoardingBinding
 import com.jk.taskmanager.data.model.OnBoard
-import kotlin.reflect.KFunction1
 
 class OnBoardingAdapter(private val onClick:() -> Unit) :
     RecyclerView.Adapter<OnBoardingAdapter.OnBoardingViewHolder>() {

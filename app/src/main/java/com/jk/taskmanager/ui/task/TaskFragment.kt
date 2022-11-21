@@ -13,7 +13,8 @@ import com.jk.taskmanager.R
 import com.jk.taskmanager.databinding.FragmentTaskBinding
 import com.jk.taskmanager.data.model.Task
 
-class TaskFragment : Fragment() {
+class
+TaskFragment : Fragment() {
     private lateinit var binding: FragmentTaskBinding
 
     override fun onCreateView(
