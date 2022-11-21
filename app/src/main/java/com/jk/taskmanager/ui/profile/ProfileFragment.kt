@@ -55,6 +55,7 @@ class ProfileFragment : Fragment() {
                         .resize(800, 800)
                         .into(binding.profileImage)
 
+
                 }
             }
         }
