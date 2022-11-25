@@ -9,6 +9,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.jk.taskmanager.data.local.Pref
 import com.jk.taskmanager.databinding.FragmentProfileBinding
+import com.jk.taskmanager.utils.loadImage
 import com.squareup.picasso.Picasso
 
 
@@ -21,7 +22,7 @@ class ProfileFragment : Fragment() {
             // Handle the returned Uri
             uri?.let { it ->
                 // The image was saved into the given Uri -> do something with it
-                Picasso.with(context).load(it).resize(800, 800).into(binding.profileImage)
+                binding.profileImage.loadImage(uri.toString())
                 pref.saveImage(uri.toString())
             }
         }
@@ -36,31 +37,21 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        pref = Pref(requireContext())
+        binding.profileImage.loadImage(pref.getImage().toString())
         binding.profileImage.setOnClickListener {
             getContent.launch("image/*")
+        }
 
-            pref = Pref(requireContext())
+        binding.etName2.setText(pref.getName())
+        binding.etName2.addTextChangedListener {
+            pref.saveName(binding.etName2.text.toString())
 
-            //name
-            binding.etName2.setText(pref.getName())
-            binding.etName2.addTextChangedListener {
-                pref.saveName(binding.etName2.text.toString())
+        }
+        binding.etAge2.setText(pref.getAge()).toString()
+        binding.etAge2.addTextChangedListener {
+            pref.saveAge(binding.etAge2.text.toString())
 
-
-                //age
-                binding.etAge2.setText(pref.getAge()).toString()
-                binding.etAge2.addTextChangedListener {
-                    pref.saveAge(binding.etAge2.text.toString())
-
-                 //image
-                    Picasso.with(context).load(pref.getImage())
-                        .resize(800, 800)
-                        .into(binding.profileImage)
-
-
-                }
-            }
         }
     }
 }
