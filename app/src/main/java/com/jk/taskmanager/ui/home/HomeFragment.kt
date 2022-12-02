@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jk.taskmanager.App
 import com.jk.taskmanager.R
+import com.jk.taskmanager.data.model.Task
 import com.jk.taskmanager.databinding.FragmentHomeBinding
 import com.jk.taskmanager.ui.home.adapter.TaskAdapter
 
@@ -21,8 +23,11 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = TaskAdapter(context = requireContext())
+        adapter = TaskAdapter(context = requireContext(),this::onTaskClick)
 
+    }
+    private fun onTaskClick(task: Task){
+        findNavController().navigate(R.id.taskFragment, bundleOf("task" to task))as Task
     }
 
     override fun onCreateView(

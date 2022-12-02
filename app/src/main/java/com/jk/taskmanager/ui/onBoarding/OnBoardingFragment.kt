@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.jk.taskmanager.R
 import com.jk.taskmanager.data.local.Pref
 import com.jk.taskmanager.databinding.FragmentOnBoardingBinding
 import com.jk.taskmanager.ui.onBoarding.adapter.OnBoardingAdapter
@@ -24,22 +26,21 @@ class OnBoardingFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pref = Pref(requireContext())
-        val adapter = OnBoardingAdapter{
-            pref.saveShowBoarding(true)
-
-            findNavController().navigateUp()
+        val adapter = OnBoardingAdapter {
+            if (FirebaseAuth.getInstance().currentUser?.uid == null) {
+                findNavController().navigate(R.id.authFragment)
+            } else {
+                pref.saveShowBoarding(true)
+                findNavController().navigateUp()
+            }
         }
 
         binding.viewPager.adapter = adapter
         binding.indicator.setViewPager(binding.viewPager)
 
 
-    }
-
-    private fun onClick() {
-        findNavController().navigateUp()
     }
 }

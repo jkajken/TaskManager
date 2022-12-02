@@ -1,5 +1,6 @@
 package com.jk.taskmanager.ui.onBoarding.adapter
 
+import android.graphics.drawable.AnimationDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -11,9 +12,9 @@ import com.jk.taskmanager.data.model.OnBoard
 class OnBoardingAdapter(private val onClick:() -> Unit) :
     RecyclerView.Adapter<OnBoardingAdapter.OnBoardingViewHolder>() {
     private val arrayList = arrayListOf<OnBoard>(
-        OnBoard(R.drawable.time, "Task Manager", "Creative space to save your time"),
-        OnBoard(R.drawable.week, "Notifications", "Quick notes on the go"),
-        OnBoard(R.drawable.qwerty, "Always with you", "Fully functional offline")
+        OnBoard(R.raw.pink, "Task Manager", "Creative space to save your time"),
+        OnBoard(R.raw.completed, "Notifications", "Quick notes on the go"),
+        OnBoard(R.raw.clip, "Always with you", "Fully functional offline")
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnBoardingViewHolder {
@@ -37,7 +38,7 @@ class OnBoardingAdapter(private val onClick:() -> Unit) :
             binding.apply {
                 btnGetStarted.isVisible = adapterPosition == arrayList.lastIndex
                 btnSkip.isVisible = adapterPosition != arrayList.lastIndex
-                onBoard.image?.let { onBoardImgV.setImageResource(it) }
+                onBoard.image?.let { onBoardImgV.setAnimation(it) }
                 tvTitle.text = onBoard.title
                 tvDescription.text = onBoard.description
                 binding.btnGetStarted.setOnClickListener {

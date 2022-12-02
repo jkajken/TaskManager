@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.jk.taskmanager.data.local.Pref
 import com.jk.taskmanager.databinding.ActivityMainBinding
 
@@ -28,6 +29,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         if (!pref.isOnBoardingShown()) {
             navController.navigate(R.id.onBoardingFragment)
+        }
+
+        if (FirebaseAuth.getInstance().currentUser?.uid == null){
+            navController.navigate(R.id.authFragment)
         }
 
         // Passing each menu ID as a set of Ids because each
