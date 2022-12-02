@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 class AuthFragment : Fragment() {
     private lateinit var binding: FragmentAuthBinding
-    private lateinit var verificationId: String
+    private var verId: String=""
     private var auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
@@ -31,19 +31,14 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.smsBtn.setOnClickListener {
-            verificationId = binding.etVerPhoneNumber.text.toString()
-            if (verificationId.isNotEmpty()) {
                 val options = PhoneAuthOptions.newBuilder(auth)
-                    .setPhoneNumber(verificationId)       // Phone number to verify
+                    .setPhoneNumber(binding.etVerPhoneNumber.text.toString())       // Phone number to verify
                     .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                     .setActivity(requireActivity())                 // Activity (for callback binding)
                     .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
                     .build()
                 PhoneAuthProvider.verifyPhoneNumber(options)
                 binding.phoneProgressBar.visibility = View.VISIBLE
-            } else
-                (Toast.makeText(requireContext(), "Please enter the number", Toast.LENGTH_SHORT)
-                    .show())
         }
     }
 
@@ -81,6 +76,7 @@ class AuthFragment : Fragment() {
             token: PhoneAuthProvider.ForceResendingToken
         ) {
             super.onCodeSent(verificationId, token)
+            verId = verificationId
             binding.textInputPhoneNumber.visibility = View.INVISIBLE
             binding.smsBtn.visibility = View.INVISIBLE
             binding.etVerSmsCode.visibility = View.VISIBLE
@@ -97,7 +93,7 @@ class AuthFragment : Fragment() {
         }
 
         private fun verifyCode(code: String) {
-            val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
+            val credential = PhoneAuthProvider.getCredential(verId,code)
             signInWithPhoneAuthCredential(credential)
         }
 
@@ -106,7 +102,6 @@ class AuthFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("TAG", "signInWithCredential:success")
-                    val user = task.result?.user
                     Toast.makeText(
                         requireActivity(), "Authenticate Successfully ", Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
