@@ -105,15 +105,16 @@ class AuthFragment : Fragment() {
             auth.signInWithCredential(credential).addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+                    Log.d("TAG", "signInWithCredential:success")
+                    val user = task.result?.user
                     Toast.makeText(
-                        requireContext(), "Authenticate Successfully ", Toast.LENGTH_SHORT
-                    ).show()
+                        requireActivity(), "Authenticate Successfully ", Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
                 } else {
                     // Sign in failed, display a message and update the UI
                     Log.d("TAG", "SignInWithCredential${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(requireActivity(), "Failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), "Verification/*Failed", Toast.LENGTH_SHORT).show()
                     }
                     // Update UI
                 }
